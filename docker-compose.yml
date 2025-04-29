@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  landing-page:
+    build: .
+    container_name: landing-page
+    restart: unless-stopped
+    networks:
+      - web-apps
+    labels:
+      - "traefik.enable=true"
+      # Configuração para domínio principal
+      - "traefik.http.routers.landing.rule=Host(`kingdomsys.com`)"
+      - "traefik.http.routers.landing.entrypoints=websecure"
+      - "traefik.http.routers.landing.tls.certresolver=letsencrypt"
+      # Redirecionamento do subdomínio api para o domínio principal
+      - "traefik.http.routers.api-redirect.rule=Host(`api.kingdomsys.com`) && Path(`/`)"
+      - "traefik.http.routers.api-redirect.entrypoints=websecure"
+      - "traefik.http.routers.api-redirect.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.api-redirect.middlewares=redirect-to-main"
+      - "traefik.http.middlewares.redirect-to-main.redirectregex.regex=^https://api.kingdomsys.com/$$"
+      - "traefik.http.middlewares.redirect-to-main.redirectregex.replacement=https://kingdomsys.com/"
+      - "traefik.http.middlewares.redirect-to-main.redirectregex.permanent=true"
+
+networks:
+  web-apps:
+    external: true
