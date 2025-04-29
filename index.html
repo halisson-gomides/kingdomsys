@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KimgdomSys - Soluções Tecnológicas para o Reino</title>
+    <link rel="icon" href="https://img1.wsimg.com/isteam/ip/3414b9ec-40fe-4bcb-873a-cf0ef3f81fb1/favicon/1b1ee852-c8c4-48da-85a5-da88b271c600.png/:/rs=w:16,h:16,m">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1fa5c0;
+            --secondary-blue: #2563eb;
+            --dark-blue: #1e3a8a;
+            --light-blue: #93c5fd;
+            --accent-blue: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--accent-blue) 100%);
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .wave-shape svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+        
+        .wave-shape .shape-fill {
+            fill: #FFFFFF;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-16 w-auto" src="https://img1.wsimg.com/isteam/ip/3414b9ec-40fe-4bcb-873a-cf0ef3f81fb1/favicon/1b1ee852-c8c4-48da-85a5-da88b271c600.png/:/rs=w:180,h:180,m" alt="KimgdomSys Logo">
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#home" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">Início</a>
+                    <a href="#services" class="nav-link text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">Serviços</a>
+                    <a href="#about" class="nav-link text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">Sobre</a>
+                    <a href="#contact" class="nav-link text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">Contato</a>
+                    <a href="#contact" class="btn-primary ml-4">Solicitar Demonstração</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white pt-20 pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mt-10 mx-auto max-w-md sm:mt-16 lg:mt-0 lg:max-w-none">
+                    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                        <span class="block">Aplicações Web para</span>
+                        <span class="block text-blue-200">Gestão de Negócios</span>
+                    </h1>
+                    <p class="mt-6 text-xl text-blue-100 max-w-3xl">
+                        Soluções tecnológicas inovadoras, a serviço do reino de Deus, para impulsionar a eficiência e o crescimento do seu negócio.
+                    </p>
+                    <div class="mt-10 flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="btn-primary text-center">Começar Agora</a>
+                        <a href="#services" class="bg-white text-blue-600 font-medium rounded-lg px-6 py-3 text-center shadow-sm hover:bg-gray-50 transition duration-150 ease-in-out">Nossos Serviços</a>
+                    </div>
+                </div>
+                <div class="mt-12 relative animate-float">
+                    <img class="w-full max-w-lg mx-auto" src="static/img/lp_app_dashboard_03.png" alt="App Dashboard">
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="wave-shape">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        -->
+    </section>
+
+    <!-- Features Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Nossas Soluções Tecnológicas
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Desenvolvemos sistemas personalizados para atender às necessidades específicas do seu negócio.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-4">Gestão Empresarial</h3>
+                    <p class="text-gray-600 text-center">
+                        Sistemas completos para gestão financeira, estoque, vendas e relatórios gerenciais, integrados em uma única plataforma.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-4">Gestão Eclesiástica</h3>
+                    <p class="text-gray-600 text-center">
+                        Soluções específicas para igrejas e ministérios, incluindo gestão de membros, dízimos, eventos e muito mais.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-4">Aplicativos Móveis</h3>
+                    <p class="text-gray-600 text-center">
+                        Desenvolvimento de aplicativos iOS e Android personalizados para conectar você com seus clientes ou membros.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-4">E-commerce</h3>
+                    <p class="text-gray-600 text-center">
+                        Lojas virtuais completas com integração de pagamentos, frete e gestão de pedidos.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-4">Hospedagem na Nuvem</h3>
+                    <p class="text-gray-600 text-center">
+                        Armazenamento seguro e acessível de dados com backup automático e alta disponibilidade.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-4">Suporte Técnico</h3>
+                    <p class="text-gray-600 text-center">
+                        Suporte especializado para garantir que seus sistemas estejam sempre funcionando perfeitamente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="relative">
+                    <img class="w-full rounded-xl shadow-lg" src="static/img/nosso_time_01.png" alt="Our Team">
+                    <div class="absolute -bottom-6 -right-6 bg-blue-500 rounded-xl p-6 shadow-lg w-2/3">
+                        <h3 class="text-white font-bold text-xl mb-2">Missão</h3>
+                        <p class="text-blue-100">
+                            Oferecer tecnologia de qualidade que honre a Deus e sirva às pessoas com excelência.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-12 lg:mt-0 lg:pl-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl mb-6">
+                        Sobre a KimgdomSys
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        A KimgdomSys nasceu da visão de unir tecnologia e fé, criando soluções que não apenas resolvam problemas empresariais, mas que também glorifiquem a Deus através da excelência no serviço.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Nossa equipe é composta por profissionais cristãos comprometidos com valores éticos e bíblicos, que buscam em cada projeto não apenas atender às necessidades técnicas, mas também abençoar vidas.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-500 text-white">
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-600">
+                                <span class="font-medium">Valores Cristãos:</span> Integridade, honestidade e serviço como princípios fundamentais.
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-500 text-white">
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-600">
+                                <span class="font-medium">Tecnologia com Propósito:</span> Soluções que realmente fazem a diferença no seu negócio ou ministério.
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-500 text-white">
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-600">
+                                <span class="font-medium">Suporte Personalizado:</span> Relacionamento próximo e atendimento humanizado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+     <!--
+    <section class="py-16 bg-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    O que nossos clientes dizem
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Veja como estamos impactando negócios e ministérios com nossas soluções.
+                </p>
+            </div>
+            -->
+            <!-- 
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                 <!--
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/150?text=PF" alt="Pastor Felipe">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Pastor Felipe</h4>
+                            <p class="text-blue-600">Igreja Batista Vida Nova</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "O sistema de gestão eclesiástica da KimgdomSys revolucionou nossa administração. Agora temos controle total sobre membros, dízimos e eventos, tudo integrado e fácil de usar."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                -->
+                <!-- Testimonial 2 -->
+                 <!--
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/150?text=MC" alt="Maria Clara">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Maria Clara</h4>
+                            <p class="text-blue-600">Loja de Artigos Cristãos</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "Depois que implementamos o sistema de gestão da KimgdomSys, nossa produtividade aumentou em 40%. O atendimento personalizado faz toda a diferença!"
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            -->
+                <!-- Testimonial 3 -->
+                 <!--
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/150?text=JR" alt="João Ricardo">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">João Ricardo</h4>
+                            <p class="text-blue-600">Editora Gospel</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "O e-commerce desenvolvido pela KimgdomSys superou nossas expectativas. As vendas online aumentaram significamente e a integração com nosso ERP foi perfeita."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-indigo-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold sm:text-4xl mb-6">
+                Pronto para transformar seu negócio?
+            </h2>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+                Entre em contato conosco e descubra como podemos ajudar sua empresa ou ministério a alcançar novos patamares com tecnologia de qualidade.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="btn-primary bg-white text-slate-200 hover:bg-gray-100">Solicitar Demonstração</a>
+                <!--
+                <a href="tel:+5511999999999" class="bg-transparent border-2 border-white text-white font-medium rounded-lg px-6 py-3 hover:bg-white hover:text-blue-600 transition duration-150 ease-in-out">
+                    <i class="fas fa-phone-alt mr-2"></i> (61) 99999-9999
+                </a>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+                <div class="mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl mb-6">
+                        Entre em Contato
+                    </h2>
+                    <p class="text-gray-600 mb-8">
+                        Tem dúvidas sobre nossos serviços? Quer solicitar um orçamento ou agendar uma demonstração? Preencha o formulário ao lado ou utilize nossos outros canais de contato.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <!--
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Endereço</h3>
+                                <p class="text-gray-600">Rua Exemplo, 123 - São Paulo/SP</p>
+                            </div>
+                        </div>
+                        -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Email</h3>
+                                <p class="text-gray-600">halisson.gomides@kimgdomsys.com</p>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Telefone</h3>
+                                <p class="text-gray-600">(11) 99999-9999</p>
+                            </div>
+                        </div>
+                        -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Horário de Atendimento</h3>
+                                <p class="text-gray-600">Segunda a Sexta, das 9h às 18h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <form id="myForm" class="bg-white rounded-b-2xl shadow-xl p-8 space-y-6">
+                        <div class="space-y-4">
+                            <!-- Nome -->
+                            <div>
+                                <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                    <input type="text" id="nome" name="nome" 
+                                        class="pl-10 w-full px-4 py-2 rounded-lg border border-gray-300 input-focus focus:outline-none focus:border-indigo-500 transition duration-200"
+                                        placeholder="Digite seu nome" required>
+                                </div>
+                                <p id="nome-error" class="mt-1 text-sm text-red-600 hidden">Por favor, insira seu nome</p>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                    <input type="email" id="email" name="email" 
+                                        class="pl-10 w-full px-4 py-2 rounded-lg border border-gray-300 input-focus focus:outline-none focus:border-indigo-500 transition duration-200"
+                                        placeholder="seu@email.com" required>
+                                </div>
+                                <p id="email-error" class="mt-1 text-sm text-red-600 hidden">Por favor, insira um e-mail válido</p>
+                            </div>
+                            
+                            <!-- Telefone -->
+                            <div>
+                                <label for="telefone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-phone text-gray-400"></i>
+                                    </div>
+                                    <input type="tel" id="telefone" name="telefone" 
+                                        class="pl-10 w-full px-4 py-2 rounded-lg border border-gray-300 input-focus focus:outline-none focus:border-indigo-500 transition duration-200"
+                                        placeholder="(00) 00000-0000" required>
+                                </div>
+                                <p id="telefone-error" class="mt-1 text-sm text-red-600 hidden">Por favor, insira um telefone válido</p>
+                            </div>
+                            
+                            <!-- Assunto -->
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Assunto</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-comment text-gray-400"></i>
+                                    </div>
+                                    <select id="subject" name="subject" class="pl-10 w-full px-4 py-2 rounded-lg border border-gray-300 input-focus focus:outline-none focus:border-indigo-500 transition duration-200"
+                                    required>
+                                        <option>Selecione um assunto</option>
+                                        <option>Solicitar Demonstração</option>
+                                        <option>Orçamento</option>
+                                        <option>Suporte Técnico</option>
+                                        <option>Outros</option>
+                                    </select>                                    
+                                </div>
+                                <p id="subject-error" class="mt-1 text-sm text-red-600 hidden">Por favor, selecione um assunto</p>
+                            </div>
+                            
+                            <!-- Mensagem -->
+                            <div>
+                                <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
+                                <textarea id="mensagem" name="mensagem" rows="4"
+                                    class="w-full px-4 py-2 rounded-lg border border-gray-300 input-focus focus:outline-none focus:border-indigo-500 transition duration-200"
+                                    placeholder="Digite sua mensagem aqui..."></textarea>
+                                <p id="mensagem-error" class="mt-1 text-sm text-red-600 hidden">Por favor, insira sua mensagem</p>
+                            </div>                            
+                            
+                        </div>
+                        
+                        <div>
+                            <button type="submit" 
+                                class="btn-primary w-full justify-center">
+                                <i class="fas fa-paper-plane mr-2"></i> Enviar Mensagem
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Modal de sucesso -->
+                    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                        <div class="bg-white rounded-xl p-8 max-w-sm w-full mx-4 text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Sucesso!</h3>
+                            <p class="text-gray-600 mb-6">Seu formulário foi enviado com sucesso.</p>
+                            <button id="closeModal" class="btn-primary py-2 px-6 rounded-lg font-medium hover:opacity-90 transition duration-200">
+                                Fechar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <img class="h-8 mb-4" src="https://via.placeholder.com/150x50?text=KimgdomSys" alt="KimgdomSys Logo">
+                    <p class="text-gray-400">
+                        Soluções tecnológicas inovadoras, a serviço do reino de Deus, para impulsionar a eficiência e o crescimento do seu negócio.
+                    </p>
+                    <div class="mt-6 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-200 tracking-wider uppercase mb-4">Links Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Início</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Serviços</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contato</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-200 tracking-wider uppercase mb-4">Serviços</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Gestão Empresarial</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Gestão Eclesiástica</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Aplicativos Móveis</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">E-commerce</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hospedagem</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">
+                    &copy; 2023 KimgdomSys. Todos os direitos reservados.
+                </p>
+                <div class="mt-4 md:mt-0 flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Política de Privacidade</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Termos de Serviço</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('myForm');
+            const successModal = document.getElementById('successModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Máscara para telefone
+            const telefoneInput = document.getElementById('telefone');
+            telefoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 11) {
+                    value = value.substring(0, 11);
+                }
+                
+                if (value.length > 0) {
+                    value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                }
+                
+                if (value.length > 10) {
+                    value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                } else if (value.length > 6) {
+                    value = value.replace(/(\d{4})(\d)/, '$1-$2');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Validação do formulário
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Reset errors
+                document.querySelectorAll('[id$="-error"]').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Validação do nome
+                const nome = document.getElementById('nome');
+                if (!nome.value.trim()) {
+                    document.getElementById('nome-error').classList.remove('hidden');
+                    nome.classList.add('border-red-500', 'shake');
+                    setTimeout(() => nome.classList.remove('shake'), 500);
+                    isValid = false;
+                } else {
+                    nome.classList.remove('border-red-500');
+                }
+                
+                // Validação do email
+                const email = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    document.getElementById('email-error').classList.remove('hidden');
+                    email.classList.add('border-red-500', 'shake');
+                    setTimeout(() => email.classList.remove('shake'), 500);
+                    isValid = false;
+                } else {
+                    email.classList.remove('border-red-500');
+                }
+                
+                // Validação do telefone
+                const telefone = document.getElementById('telefone');
+                const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+                if (!telefoneRegex.test(telefone.value)) {
+                    document.getElementById('telefone-error').classList.remove('hidden');
+                    telefone.classList.add('border-red-500', 'shake');
+                    setTimeout(() => telefone.classList.remove('shake'), 500);
+                    isValid = false;
+                } else {
+                    telefone.classList.remove('border-red-500');
+                }
+                
+                // Validação do assunto
+                const subject = document.getElementById('subject');
+                if (subject.value === "Selecione um assunto") {
+                    document.getElementById('subject-error').classList.remove('hidden');
+                    subject.classList.add('border-red-500', 'shake');
+                    setTimeout(() => subject.classList.remove('shake'), 500);
+                    isValid = false;
+                } else {
+                    subject.classList.remove('border-red-500');
+                    document.getElementById('subject-error').classList.add('hidden');
+                }
+                
+                // Validação da mensagem
+                const mensagem = document.getElementById('mensagem');
+                if (!mensagem.value.trim()) {
+                    document.getElementById('mensagem-error').classList.remove('hidden');
+                    mensagem.classList.add('border-red-500', 'shake');
+                    setTimeout(() => mensagem.classList.remove('shake'), 500);
+                    isValid = false;
+                } else {
+                    mensagem.classList.remove('border-red-500');
+                    document.getElementById('mensagem-error').classList.add('hidden');
+                }
+                
+                if (isValid) {
+                    // Simular envio do formulário
+                    console.log('Form data:', {
+                        nome: nome.value,
+                        email: email.value,
+                        telefone: telefone.value,
+                        subject: subject.value,
+                        mensagem: document.getElementById('mensagem').value
+                    });
+
+                    setTimeout(() => {
+                        form.reset();
+                        successModal.classList.remove('hidden');
+                    }, 500);
+                }
+            });
+            
+            // Fechar modal
+            closeModal.addEventListener('click', function() {
+                successModal.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
