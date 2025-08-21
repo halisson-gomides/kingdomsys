@@ -761,19 +761,36 @@
                 }
                 
                 if (isValid) {
-                    // Simular envio do formulário
-                    console.log('Form data:', {
+                    const formData = {
                         nome: nome.value,
                         email: email.value,
                         telefone: telefone.value,
                         subject: subject.value,
                         mensagem: document.getElementById('mensagem').value
-                    });
+                    };
 
-                    setTimeout(() => {
+                    fetch('/api/send_email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Network response was not ok.');
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
                         form.reset();
                         successModal.classList.remove('hidden');
-                    }, 500);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Houve um erro ao enviar sua mensagem. Por favor, tente novamente mais tarde.');
+                    });
                 }
             });
             
