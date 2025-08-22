@@ -39,6 +39,7 @@ async def send_email(form: ContactForm):
     mailer.set_subject(form.subject, mail_body)
 
     html_content = f"""
+    <h2>KingdomSys</h2>
     <h3>Nova mensagem do formulário de contato</h3>
     <p><strong>Nome:</strong> {form.nome}</p>
     <p><strong>Email:</strong> {form.email}</p>
