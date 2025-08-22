@@ -35,6 +35,7 @@ async def send_email(form: ContactForm):
          .from_email(os.getenv("FROM_EMAIL"), form.nome)
          .to_many([{"email": os.getenv("TO_EMAIL"), "name": "Administrador"}])
          .template("0r83ql3opy0lzw1j")
+         .subject("Mensagem de KingdomSys")
          .personalize_many([{
              "email": os.getenv("TO_EMAIL"),
              "data": {
