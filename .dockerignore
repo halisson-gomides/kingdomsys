@@ -1,11 +1,9 @@
 **/__pycache__/
 **/*.pyc
 **/*.pfx
-**/.env
 .vscode/
 .ipynb_checkpoints
-.nicegui/
-env_cafe/
+env/
 company/cerfiles/
 docs/
-backlog.log
+**/*.log
