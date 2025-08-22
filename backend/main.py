@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 from mailersend import MailerSendClient, EmailBuilder
 import uvicorn
@@ -10,6 +11,15 @@ load_dotenv()
 
 app = FastAPI()
 
+# Configuração de CORS: Essencial para permitir requisições do frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://kingdomsys.com"], # Especifique o domínio do seu frontend
+    allow_credentials=True,
+    allow_methods=["GET", "POST"], # Permita os métodos que você usa
+    allow_headers=["*"], # Permita todos os cabeçalhos, ou especifique-os
+)
+
 class ContactForm(BaseModel):
     nome: str
     email: EmailStr
@@ -17,7 +27,7 @@ class ContactForm(BaseModel):
     subject: str
     mensagem: str
 
-@app.post("/api/send_email")
+@app.post("/send_email")
 async def send_email(form: ContactForm):
     ms = MailerSendClient()
 
