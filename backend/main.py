@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 from mailersend import MailerSendClient, EmailBuilder
@@ -27,7 +27,7 @@ class ContactForm(BaseModel):
     subject: str
     mensagem: str
 
-@app.post("/send_email")
+@app.post("/api/send_email")
 async def send_email(form: ContactForm):
     ms = MailerSendClient()
 
@@ -55,9 +55,9 @@ async def send_email(form: ContactForm):
 
     try:
         response = ms.emails.send(email)
-        return {"message": "Email sent successfully"}
+        return {"message": "Email sent successfully", "status_code": status.HTTP_200_OK}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=e.__repr__())
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=e.__repr__())
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

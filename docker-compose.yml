@@ -10,11 +10,17 @@ services:
     networks:
       - web-apps
     labels:
+      # Habilita o Traefik para este serviço
       - "traefik.enable=true"
+      # Define a regra de roteamento: todas as requisições para 'kingdomsys.com'
       - "traefik.http.routers.frontend.rule=Host(`kingdomsys.com`)"
+      # Define o entrypoint para 'websecure' (HTTPS)
       - "traefik.http.routers.frontend.entrypoints=websecure"
+      # Configura o Let's Encrypt para obtenção automática de certificados SSL
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      # Define a porta interna do container onde o serviço frontend está rodando (Nginx escuta na porta 80)
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
+      # Especifica a rede Docker que o Traefik deve usar para descobrir este serviço
       - "traefik.docker.network=web-apps"
 
   backend:
@@ -25,20 +31,31 @@ services:
     restart: unless-stopped
     networks:
       - web-apps
+    # Carrega variáveis de ambiente do arquivo .env no diretório backend
     env_file:
       - ./backend/.env
     labels:
+      # Habilita o Traefik para este serviço
       - "traefik.enable=true"
+      # Define a regra de roteamento: requisições para 'kingdomsys.com' E com prefixo '/api'
+      # O Traefik encaminha a requisição COMPLETA (incluindo /api) para o Nginx do frontend,
+      # que então faz o proxy reverso para o backend.
       - "traefik.http.routers.backend.rule=Host(`kingdomsys.com`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.backend.priority=2"
+      # Define uma prioridade para esta regra. Regras com PathPrefix devem ter prioridade maior
+      # para serem avaliadas antes de regras mais genéricas (como a do frontend).
+      - "traefik.http.routers.backend.priority=10"
+      # Define o entrypoint para 'websecure' (HTTPS)
       - "traefik.http.routers.backend.entrypoints=websecure"
+      # Configura o Let's Encrypt para obtenção automática de certificados SSL
       - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.backend.middlewares=stripprefix"
-      - "traefik.http.middlewares.stripprefix.stripprefix.prefixes=/api"
+      # Define a porta interna do container onde o serviço backend (FastAPI) está rodando
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
+      # Especifica a rede Docker que o Traefik deve usar para descobrir este serviço
       - "traefik.docker.network=web-apps"
-
 
 networks:
   web-apps:
+    # Define a rede como externa, o que significa que ela deve ser criada manualmente
+    # ou por outro serviço (como o Traefik). Isso permite que múltiplos containers
+    # e serviços se comuniquem dentro da mesma rede.
     external: true
